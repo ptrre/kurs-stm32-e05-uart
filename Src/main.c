@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -158,16 +158,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		if(znak == 'e')
 		{
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-			dl_kom = sprintf(komunikat, "DIODA ON\n");
+			dl_kom = sprintf((char *)komunikat, "DIODA ON\n");
 		}
 		else if(znak == 'd')
 		{
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-			dl_kom = sprintf(komunikat, "DIODA OFF\n");
+			dl_kom = sprintf((char *)komunikat, "DIODA OFF\n");
 		}
 		else
 		{
-			dl_kom = sprintf(komunikat, "ZLY ZNAK\n");
+			dl_kom = sprintf((char *)komunikat, "ZLY ZNAK\n");
 		}
 		HAL_UART_Transmit_IT(&huart2, komunikat, dl_kom);
 		HAL_UART_Receive_IT(&huart2, &znak, 1);
